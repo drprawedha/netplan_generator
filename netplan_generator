@@ -1,0 +1,34 @@
+#!/bin/bash
+
+OUTPUT="01-netcfg-multi.yaml"
+
+echo "network:" > $OUTPUT
+echo "  version: 2" >> $OUTPUT
+echo "  ethernets:" >> $OUTPUT
+
+while true; do
+    read -p "Masukkan nama interface (misal: ens33): " IFACE
+    read -p "Gunakan DHCP untuk $IFACE? (true/no): " DHCP
+
+    echo "    $IFACE:" >> $OUTPUT
+
+    if [ "$DHCP" == "true" ]; then
+        echo "      dhcp4: true" >> $OUTPUT
+    else
+        read -p "Masukkan static IP (misal: 192.168.1.100/24): " IPADDR
+        read -p "Masukkan gateway (misal: 192.168.1.1): " GW
+        read -p "Masukkan DNS (pisahkan dengan spasi jika lebih dari 1): " DNS
+
+        echo "      dhcp4: false" >> $OUTPUT
+        echo "      addresses:" >> $OUTPUT
+        echo "        - $IPADDR" >> $OUTPUT
+        echo "      gateway4: $GW" >> $OUTPUT
+        echo "      nameservers:" >> $OUTPUT
+        echo "        addresses: [${DNS// /, }]" >> $OUTPUT
+    fi
+
+    read -p "Tambah interface lain? (y/n): " LANJUT
+    [ "$LANJUT" != "y" ] && break
+done
+
+echo "File netplan berhasil dibuat: $OUTPUT"
