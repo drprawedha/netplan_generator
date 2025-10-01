@@ -17,7 +17,7 @@ Dengan script ini, kamu dapat menambahkan banyak interface jaringan sekaligus, b
 
 1. Clone repository:
    ```bash
-   git clone https://github.com/username/repo.git
+   git clone https://github.com/drprawedha/netplan_generator.git
    cd repo
    ```
 2. Beri permission agar script bisa dieksekusi:
