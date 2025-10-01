@@ -34,3 +34,13 @@ Dengan script ini, kamu dapat menambahkan banyak interface jaringan sekaligus, b
 - Jika static, masukkan IP Address, Gateway, dan DNS
 - Ulangi untuk interface lain jika diperlukan
 - Setelah selesai, file konfigurasi akan dibuat di: 01-netcfg-multi.yaml
+
+## Catatan
+
+File hasil script (01-netcfg-multi.yaml) masih perlu dipindahkan ke direktori netplan:
+```bash
+sudo mv 01-netcfg-multi.yaml /etc/netplan/
+sudo netplan try
+```
+Pastikan Anda memiliki hak akses root untuk menerapkan konfigurasi.
+Gunakan dengan hati-hati, karena salah konfigurasi dapat menyebabkan server kehilangan koneksi jaringan.
